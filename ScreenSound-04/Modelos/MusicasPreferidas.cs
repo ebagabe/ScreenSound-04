@@ -1,4 +1,5 @@
 ﻿
+using System.Text.Json;
 
 namespace ScreenSound_04.Modelos;
 
@@ -25,5 +26,19 @@ internal class MusicasPreferidas
         {
             Console.WriteLine($"- {musica.Nome} de {musica.Artista}");
         }
+    }
+
+    public void GerarArquivoJson()
+    {
+        string json = JsonSerializer.Serialize(new
+        {
+            nome = Nome,
+            musicas = ListaDeMusicasFavoritas
+        });
+
+        string nomeDoArquivo = $"musicas-favoritas-{Nome}.json";
+
+        File.WriteAllText(nomeDoArquivo, json);
+        Console.WriteLine("Json foi criado com sucesso");
     }
 }
